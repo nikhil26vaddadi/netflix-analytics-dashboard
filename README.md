@@ -8,7 +8,7 @@
 A minimal Streamlit app that **embeds a Power BI report** using the public *Publish to web* URL—no extra UI, just the dashboard.
 
 **Live demo:**  
-[YOUR_STREAMLIT_APP_URL](https://netflix-analytics-dashboard-78z9dst6b4nsdjte6kvrmg.streamlit.app/)
+[STREAMLIT_APP_URL](https://netflix-analytics-dashboard-78z9dst6b4nsdjte6kvrmg.streamlit.app/)
 
 ---
 
@@ -27,4 +27,5 @@ PBI_EMBED_URL = "https://app.powerbi.com/view?r=YOUR_EMBED_ID"
 params = "filterPaneEnabled=false&navContentPaneEnabled=false"
 sep = "&" if "?" in PBI_EMBED_URL else "?"
 iframe_url = f"{PBI_EMBED_URL}{sep}{params}"
+
 

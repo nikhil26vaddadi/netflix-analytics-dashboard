@@ -1,55 +1,30 @@
-# 🎬 Netflix Analytics Dashboard
+# 🎬 Netflix Analytics Dashboard (Power BI → Streamlit)
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![Streamlit](https://img.shields.io/badge/App-Streamlit-informational)
-![Status](https://img.shields.io/badge/Status-Active-brightgreen)
-![License](https://img.shields.io/badge/License-MIT-lightgrey)
+![Power BI](https://img.shields.io/badge/Report-Power%20BI-orange)
+![Status](https://img.shields.io/badge/Status-Live-brightgreen)
 
-An interactive **Streamlit** dashboard to explore Netflix titles by **type, year, genres, ratings, and countries**.  
-Built for portfolio-grade analytics storytelling with clean filtering, KPIs, and Plotly charts.
+A minimal Streamlit app that **embeds a Power BI report** using the public *Publish to web* URL—no extra UI, just the dashboard.
 
----
-
-## ✨ Features
-
-- Sidebar filters: **Type**, **Release Year** range, **Top Genres**, **Top Countries**, **Keyword** search
-- KPIs: **Total titles**, **Movies**, **TV Shows**, **Countries**
-- Charts:
-  - Top Genres (bar)
-  - Titles by Release Year (area)
-  - Titles by Rating (bar)
-  - Top Countries (bar)
-- Data table of filtered titles
-- Works with your uploaded CSV or a small built-in sample (so the app always runs)
+**Live demo:**  
+[YOUR_STREAMLIT_APP_URL](https://netflix-analytics-dashboard-78z9dst6b4nsdjte6kvrmg.streamlit.app/)
 
 ---
 
-> If `data/netflix_titles.csv` is absent, you can upload a CSV from the app sidebar.
+## 🔎 Overview
+- **Report authoring:** Power BI Desktop / Service  
+- **Hosting:** Streamlit (serves a single full-screen `<iframe>` with the Power BI report)  
+- **Goal:** Provide a clean, public link to view the Power BI dashboard without exposing the Service workspace.
 
 ---
 
-## 🧮 Data (expected columns)
+## 🧱 How it works
+The app renders your Power BI **Publish to web** URL inside an iframe and optionally hides filter & navigation panes:
 
-The app is compatible with the common “Netflix titles” CSV schema (e.g., Kaggle).  
-Useful columns (case-insensitive, extra columns are ignored):
+```python
+PBI_EMBED_URL = "https://app.powerbi.com/view?r=YOUR_EMBED_ID"
+params = "filterPaneEnabled=false&navContentPaneEnabled=false"
+sep = "&" if "?" in PBI_EMBED_URL else "?"
+iframe_url = f"{PBI_EMBED_URL}{sep}{params}"
 
-- `type` — Movie / TV Show  
-- `title` — Title name  
-- `country` — Country (comma-separated)  
-- `release_year` — Year of release (numeric)  
-- `rating` — MPAA/TV rating (e.g., PG-13, TV-MA)  
-- `listed_in` — Genres (comma-separated)  
-- `date_added` — Date added to Netflix  
-- `duration` — Minutes or Seasons  
-- `description` — Short synopsis
-
-> The app automatically **explodes** multi-valued `listed_in` and `country` into single values for filtering.
-
----
-
-## 🚀 Quickstart (Local)
-
-1) **Create and activate** a virtual env:
-```bash
-python3 -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
